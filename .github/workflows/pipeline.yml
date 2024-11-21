@@ -24,6 +24,7 @@ jobs:
       # Copy repo files to the EC2 instance
       - name: Deploy to EC2
         run: |
+          echo "Deploying application..."
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ec2-user@<52.67.14.225> << 'EOF'
             sudo yum update -y
             sudo yum install -y git nodejs
