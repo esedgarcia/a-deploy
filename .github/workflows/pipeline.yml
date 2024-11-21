@@ -1,0 +1,29 @@
+name: Deploy GitHub repo to AWS
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - id: deploy
+        uses: bitovi/github-actions-deploy-github-runner-to-ec2@v0.1.3
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_DEVELOPMENT }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEVELOPMENT }}
+          aws_default_region: us-east-1
+          additional_tags: '{\"key\":\"value\",\"key2\":\"value2\"}'
+
+          aws_vpc_id: vpc-00000000000000000
+          aws_vpc_subnet_id: subnet-00000000000000
+
+          ec2_instance_type: t2.medium
+          ec2_instance_public_ip: false
+          ec2_additional_tags: '{\"key3\":\"value3\",\"key4\":\"value4\"}'
+          
+          repo_url: https://github.com/Your/Repo
+          repo_access_token: ${{ secrets.RUNNER_TOKEN }}
+
+          stack_destroy: false
+          tf_state_bucket_destroy: true
