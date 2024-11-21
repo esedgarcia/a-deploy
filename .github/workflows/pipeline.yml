@@ -32,7 +32,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           echo "Deploying application..."
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ec2-user@52.67.14.225 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@52.67.14.225 << 'EOF'
             sudo yum update -y
             sudo yum install -y git nodejs
             git clone https://github.com/esedgarcia/a-deploy.git
