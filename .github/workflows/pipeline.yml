@@ -46,5 +46,6 @@ jobs:
             git clone https://github.com/esedgarcia/a-deploy.git /home/ec2-user/a-deploy
             cd /home/ec2-user/a-deploy
             npm install
-            sudo npm start
+            nohup npm start > app.log 2>&1 &
+            echo "Application deployed and running in the background."
           EOF
