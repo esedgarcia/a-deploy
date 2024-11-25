@@ -35,8 +35,16 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@52.67.14.225 << 'EOF'
             sudo yum update -y
             sudo yum install -y git nodejs
-            git clone https://github.com/esedgarcia/a-deploy.git
-            cd a-deploy
+
+            # Clean deployment directory
+            echo "Cleaning previous deployment directory..."
+            rm -rf /home/ec2-user/a-deploy
+            mkdir -p /home/ec2-user/a-deploy
+
+            # Deploy application
+            echo "Cloning repository and starting application..."
+            git clone https://github.com/esedgarcia/a-deploy.git /home/ec2-user/a-deploy
+            cd /home/ec2-user/a-deploy
             npm install
             npm start
           EOF
